@@ -1,0 +1,13 @@
+
+name: Build DEV version
+
+on:
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build_binaries:
+    name: "Build binaries"
+    uses: ./.github/workflows/_shared-build.yaml
+

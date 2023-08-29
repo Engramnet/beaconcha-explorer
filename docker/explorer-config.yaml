@@ -1,0 +1,79 @@
+
+logging:
+  outputLevel: "info"
+  outputStderr: false
+
+  filePath: "explorer.log"
+  fileLevel: "warn"
+
+# Chain network configuration
+chain:
+  name: "tokio"
+  #genesisTimestamp: 1688126460
+  configPath: "../ephemery/config.yaml"
+  displayName: "Engram Tokio Testnet"
+
+# HTTP Server configuration
+server:
+  host: "localhost" # Address to listen on
+  port: "8080" # Port to listen on
+
+frontend:
+  enabled: true # Enable or disable to web frontend
+  debug: false
+  minimize: false # minimize html templates
+
+  # Name of the site, displayed in the title tag
+  siteName: "Engram Explorer"
+  siteSubtitle: "Powered Beaconcha"
+  
+  # link to EL Explorer
+  ethExplorerLink: "https://explorer.ephemery.dev/"
+
+  # file or inventory url to load validator names from
+  validatorNamesYaml: "validator_names.yaml"
+  #validatorNamesInventory: "https://config.4844-devnet-7.ethpandaops.io/api/v1/nodes/validator-ranges"
+  
+beaconapi:
+  # CL Client RPC
+  endpoint: "http://127.0.0.1:5052"
+
+  # local cache for page models
+  localCacheSize: 100 # 100MB
+
+  # remote cache for page models
+  redisCacheAddr: ""
+  redisCachePrefix: ""
+
+# indexer keeps track of the latest epochs in memory.
+indexer:
+  # max number of epochs to keep in memory
+  inMemoryEpochs: 3
+
+  # disable synchronizing and everything that writes to the db (indexer just maintains local cache)
+  disableIndexWriter: false
+
+  # number of seconds to wait between each epoch (don't overload CL client)
+  syncEpochCooldown: 2
+
+# database configuration
+database:
+  engine: "sqlite" # sqlite / pgsql
+
+  # sqlite settings
+  sqlite:
+    file: "./explorer-db.sqlite"
+
+  # pgsql settings
+  pgsql:
+    host: "127.0.0.1"
+    port: 5432
+    user: ""
+    password: ""
+    name: ""
+  pgsqlWriter: # optional separate writer connection (used for replication setups)
+    host: ""
+    port: 5432
+    user: ""
+    password: ""
+    name: ""
